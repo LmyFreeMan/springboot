@@ -1,0 +1,24 @@
+#server:
+#  port: 8086
+#person:
+#  lastName: zhangsan
+#  age: 18
+#  boss: false
+#  birth: 2017/12/12
+#  maps: {k1: v1,k2: v2}
+#  lists:
+#    - lisi
+#    - zhaoliu
+#  dog:
+#    name: 小狗
+#    age: 2
+spring:
+  profiles:
+    include: database,logging,mybatis,pageHelper
+devtools:
+  livereload:
+    enabled: true #是否支持livereload
+    port: 35729
+  restart:
+    enabled: true #是否支持热部署
+
