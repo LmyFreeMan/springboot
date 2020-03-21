@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.mapper.EmployeeMapper">
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM employee WHERE workNum=#{id}
+    </delete>
+    <!--    public Employee getEmpById(Integer id);
+
+     public void insertEmp(Employee employee);-->
+    <select id="getEmpById" resultType="com.web.entities.Employee" parameterType="int" resultMap="associationMap">
+        SELECT * FROM employee,department WHERE worknum=#{id} and employee.did=department.id
+    </select>
+
+    <insert id="insertEmp">
+        INSERT INTO employee(lastName,email,gender,did,birth) VALUES (#{lastName},#{email},#{gender},#{department.id},#{birth})
+    </insert>
+    <select id="getAllEmp" resultType="com.web.entities.Employee"  resultMap="associationMap">
+        select  * from employee,department where employee.did=department.id
+    </select>
+
+    <resultMap id="associationMap" type="com.web.entities.Employee">
+        <id property="workNum" column="worknum"></id>
+        <result property="lastName" column="lastname"></result>
+        <result property="email" column="email"></result>
+        <result property="gender" column="gender"></result>
+        <result property="dId" column="did"></result>
+        <result property="birth" column="birth"></result>
+         <association property="department" javaType="com.web.entities.Department">
+           <id property="id" column="id"></id>
+            <result property="departmentName" column="departmentName"></result>
+         </association>
+    </resultMap>
+    <update id="updateEmpByWorkNum">
+        UPDATE employee
+SET
+
+    lastname =#{lastName},
+    email =#{email},
+    gender =#{gender},
+    did = #{department.id},
+    birth =#{birth}
+WHERE
+    worknum =#{workNum}
+    </update>
+
+</mapper>
