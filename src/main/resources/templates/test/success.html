@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>success</title>
+</head>
+<body>
+这是成功页面
+<div th:text="${hello}"></div>
+<div th:utext="${hello}"></div>
+<h4 th:each="user:${users}" >
+    [(${user})]
+</h4>
+
+</body>
+</html>
